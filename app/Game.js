@@ -2,7 +2,7 @@ import { Quote } from "./Quote.js";
 
 class Game {
   currentStep = 0;
-  lastStep = 8;
+  lastStep = 7;
 
   quotes = [
     {
@@ -43,7 +43,7 @@ class Game {
     } else {
       this.currentStep++;
       document.getElementsByClassName('step')[this.currentStep].style.opacity = 1;
-      if (this.currentStep === this.lastStep - 1) {
+      if (this.currentStep === this.lastStep) {
         this.losing();
       }
     }
