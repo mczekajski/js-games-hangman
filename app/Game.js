@@ -1,22 +1,51 @@
+import { Quote } from './Quote.js';
+
 class Game {
-  constructor({
-    lettersWrapper,
-    categoryWrapper,
-    wordWrapper,
-    outputWrapper,
-  }) {
+  quotes = [
+    {
+      text: "pan tadeusz",
+      category: "Utwór literacki",
+    },
+    {
+      text: "janko muzykant",
+      category: "Utwór literacki",
+    },
+    {
+      text: "pingwiny z madagaskaru",
+      category: "Film",
+    },
+    {
+      text: "wyspa tajemnic",
+      category: "Film",
+    },
+  ];
+
+  constructor({ lettersWrapper, categoryWrapper, wordWrapper, outputWrapper }) {
     this.lettersWrapper = lettersWrapper;
     this.categoryWrapper = categoryWrapper;
     this.wordWrapper = wordWrapper;
     this.outputWrapper = outputWrapper;
+
+    const {text, category} = this.quotes[Math.floor(Math.random()*this.quotes.length)];
+    this.categoryWrapper.innerHTML = category;
+    this.quote = new Quote(text);
+  }
+
+  guess(letter) {
+    console.log(letter);
+  }
+
+  drawLetters() {
+    for (let i = 0; i < 26; i++) {
+      const label = (i + 10).toString(36);
+      const button = document.createElement("button");
+      button.innerText = label;
+      button.addEventListener("click", () => this.guess(label));
+      this.lettersWrapper.appendChild(button);
+    }
   }
 
   start() {
-    for (let i = 0; i<26; i++) {
-        const label = (i+10).toString(36);
-        const button = document.createElement('button');
-        button.innerText = label;
-        this.lettersWrapper.appendChild(button);
-    }
+    this.drawLetters();
   }
 }
